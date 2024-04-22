@@ -1,9 +1,15 @@
-import dotenv from "dotenv";
-import nodemailer from "nodemailer";
-import ejs from "ejs";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import dotenv from 'dotenv';
+import nodemailer from 'nodemailer';
+import ejs from 'ejs';
 import path from "path";
 
+
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const sendMail = async (options) => {
 	const transporter = nodemailer.createTransport({
@@ -19,7 +25,9 @@ const sendMail = async (options) => {
 	const { email, subject, template, data } = options;
 
 	// Get the path to the email template file
-	const templatePath = path.join(__dirname, "../mails", template);
+	
+	// const templatePath = path.join(__dirname, "../mails", template);
+	const templatePath = path.join("C:\\Users\\KJSS\\Documents\\Rader\\SkillSync_Pro\\backend\\mails\\activation.mail.ejs");
 
 	// Render the email template with EJS
 	const html = await ejs.renderFile(templatePath, data);
